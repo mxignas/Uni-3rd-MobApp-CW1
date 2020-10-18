@@ -8,8 +8,24 @@
     </nav>
 
     <div class="container bg-light text-muted">
-      <!-- <div class="container text-muted"> -->
       <div class="row">
+
+        <div class="sorting-div">
+          <h4>Sort by:</h4>
+          <div class="btn-group-vertical btn-group-toggle" data-toggle="buttons">
+            <label class="btn btn-secondary" v-for="blist in ByList" :key="blist.id" @click="addingClass">
+              <input type="radio" name="options" id="Subject" autocomplete="off" checked> {{ blist.label }}
+            </label>
+          </div>
+            <br>
+            <p></p>
+          <div class="btn-group-vertical btn-group-toggle" data-toggle="buttons">
+            <label class="btn btn-secondary" v-for="hlist in HowList" :key="hlist.id">
+              <input type="radio" name="options" id="Ascending" autocomplete="off" checked> {{ hlist.label }}
+            </label>
+          </div>
+        </div>
+
         <div class="col-md-6 col-lg-3" v-for="lesson in Lessons" :key="lesson.id">
         
           <div class="card" >
@@ -52,92 +68,53 @@ export default {
   name: 'Index',
   data () {
     return {
+      ByList: [
+        { label: "Subject", active: false
+        },
+        { label: "Location", active: false
+        },
+        { label: "Price", active: false
+        },
+        { label: "Availability", active: false
+        }
+      ],
+      HowList: [
+        { label: "Ascending", active: false
+        },
+        { label: "Descending", active: false
+        },
+      ],
       Lessons: [
         {
-          url: mathImg,
-          Title: "Lessons",
-          Activity: "Math",
-          Location: "West End",
-          Price: "£100",
-          Spaces: 5,
+          url: mathImg, Title: "Lessons", Activity: "Math", Location: "West End", Price: "£100", Spaces: 5,
         },
-        {
-          url: soccerImg,
-          Title: "Sports",
-          Activity: "Soccer",
-          Location: "Hendon",
-          Price: "£50",
-          Spaces: 5,
+        { url: soccerImg, Title: "Sports", Activity: "Soccer", Location: "Hendon", Price: "£50", Spaces: 5,
         },
-        {
-          url: englishImg,
-          Title: "Lessons",
-          Activity: "English",
-          Location: "South Kensington",
-          Price: "£80",
-          Spaces: 5,
+        { url: englishImg, Title: "Lessons", Activity: "English", Location: "Kensington", Price: "£80", Spaces: 5,
         },
-        {
-          url: boxingImg,
-          Title: "Sports",
-          Activity: "Boxing",
-          Location: "Hendon",
-          Price: "£60",
-          Spaces: 5,
+        { url: boxingImg, Title: "Sports", Activity: "Boxing", Location: "Hendon", Price: "£60", Spaces: 5,
         },
-        {
-          url: artImg,
-          Title: "Lessons",
-          Activity: "Art",
-          Location: "London",
-          Price: "£80",
-          Spaces: 5,
+        { url: artImg, Title: "Lessons", Activity: "Art",  Location: "London", Price: "£80", Spaces: 5,
         },
-        {
-          url: tennisImg,
-          Title: "Sports",
-          Activity: "Tennis",
-          Location: "Westminster",
-          Price: "£150",
-          Spaces: 5,
+        { url: tennisImg, Title: "Sports", Activity: "Tennis", Location: "Westminster", Price: "£150", Spaces: 5,
         },
-        {
-          url: scienceImg,
-          Title: "Lessons",
-          Activity: "Science",
-          Location: "London",
-          Price: "£120",
-          Spaces: 5,
+        { url: scienceImg, Title: "Lessons", Activity: "Science", Location: "London", Price: "£120", Spaces: 5,
         },
-        {
-          url: volleyballImg,
-          Title: "Sports",
-          Activity: "Volleyball",
-          Location: "Camden Town",
-          Price: "£50",
-          Spaces: 5,
+        { url: volleyballImg, Title: "Sports", Activity: "Volleyball", Location: "Camden Town", Price: "£50", Spaces: 5,
         },
-
-        {
-          url: geographyImg,
-          Title: "Lessons",
-          Activity: "Geography",
-          Location: "London",
-          Price: "£60",
-          Spaces: 5,
+        { url: geographyImg, Title: "Lessons", Activity: "Geography", Location: "London", Price: "£60", Spaces: 5,
         },
-        {
-          url: basketballImg,
-          Title: "Sports",
-          Activity: "Basketball",
-          Location: "Soho",
-          Price: "£95",
-          Spaces: 5,
+        { url: basketballImg, Title: "Sports",  Activity: "Basketball", Location: "Soho", Price: "£95", Spaces: 5,
         },
         ],
     }
   },
-}
+  methods: {
+    addingClass: function() {
+      this.ByList.addClass("active")
+    }
+  }
+  }
 
 </script>
 
@@ -150,5 +127,9 @@ export default {
   #addtocart {
     margin-left: 100px;
     width: 150px;
+  }
+  .sorting-div {
+    margin-left: 20px;
+    margin-right: 40px;
   }
 </style>
