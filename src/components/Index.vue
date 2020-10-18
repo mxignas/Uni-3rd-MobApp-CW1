@@ -7,13 +7,13 @@
       </ol>
     </nav>
 
-    <div class="container bg-info text-muted">
+    <div class="container bg-light text-muted">
       <!-- <div class="container text-muted"> -->
       <div class="row">
         <div class="col-md-6 col-lg-3" v-for="lesson in Lessons" :key="lesson.id">
         
           <div class="card" >
-            <img src="${lesson.url}" alt="" class="card-img-top img-fluid">
+            <img :src="lesson.url" alt="" class="card-img-top img-fluid">
               <div class="card-body">
                 <h3 class="card-title">{{ lesson.Title }}</h3>
                 <ul class="list-group list-group-flush">
@@ -37,6 +37,12 @@
 </template>
 
 <script>
+import mathImg from "../assets/Math.png"
+import englishImg from "../assets/English.png"
+import artImg from "../assets/aRT.png"
+import geographyImg from "../assets/Geography.png"
+import scienceImg from "../assets/Science.png"
+
 export default {
   name: 'Index',
   data () {
@@ -45,7 +51,7 @@ export default {
       ActivityTitle: "Activity",
       Lessons: [
         {
-          url: "../assets/Math.png",
+          url: mathImg,
           Title: "Lesson",
           Subject: "Math",
           Location: "London",
@@ -53,7 +59,7 @@ export default {
           Spaces: 5,
         },
         {
-          url: "../assets/Math.png",
+          url: englishImg,
           Title: "Lesson",
           Subject: "English",
           Location: "London",
@@ -61,7 +67,7 @@ export default {
           Spaces: 5,
         },
         {
-          url: "../assets/Math.png",
+          url: artImg,
           Title: "Lesson",
           Subject: "Art",
           Location: "London",
@@ -69,7 +75,7 @@ export default {
           Spaces: 5,
         },
         {
-          url: "../assets/Math.png",
+          url: scienceImg,
           Title: "Lesson",
           Subject: "Science",
           Location: "London",
@@ -77,9 +83,9 @@ export default {
           Spaces: 5,
         },
         {
-          url: "../assets/Math.png",
+          url: geographyImg,
           Title: "Lesson",
-          Subject: "geography",
+          Subject: "Geography",
           Location: "London",
           Price: "£60",
           Spaces: 5,
@@ -87,18 +93,15 @@ export default {
         ],
     }
   },
-  computed: {
-    assetsPath: function(file) {
-      return '../assets/' + file + '.png'
-    }
-  }
 }
+
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
   .card {
     width: 16rem;
+    margin-bottom: 10px;
   }
   #addtocart {
     margin-left: 130px;
