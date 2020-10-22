@@ -8,8 +8,17 @@
     </nav> -->
 
     <div class="d-flex bg-secondary">
-      <div class="p-2 bg-info">Home</div>
-      <div class="ml-auto p-2" v-if="cart.length > 0">Cart: {{ cart.length }}</div>
+      <div class="p-2 bg-info text-center"><b>Home</b></div>
+      <div class="ml-auto p-2" v-if="cart.length > 0">
+        <button type="button" class="btn btn-default bg-info text-weight-bolder" id="cartbutton">
+          <router-link :to="{name: 'Checkout', params: {items: Lessons}}">
+          <div class="glyphicon glyphicon-shopping-cart text-dark ">
+            Go to cart: <b> {{ cart.length }} </b> items
+          </div>
+          </router-link>
+          <!-- Go to cart: <b> {{ cart.length }} </b> items -->
+        </button>
+      </div>
     </div>
 
 
@@ -17,7 +26,7 @@
       <div class="row">
 
         <div class="sorting-div">
-          <h4>Sort by:</h4>
+          <h4><b>Sort by:</b></h4>
           <div class="btn-group-vertical btn-group-toggle" data-toggle="buttons">
             <label class="btn btn-secondary" v-for="blist in ByList" :key="blist.id" @:click="sortBy(blist.label)">
               <input type="radio" name="options" id="Subject" autocomplete="off" checked> {{ blist.label }}
@@ -48,7 +57,7 @@
                 </ul>
               </div>
               <div class="card-body " id="addtocart">
-                <button type="button" class="btn btn-info" @click='addToCart(index)' >Add To Cart</button>
+                <button type="button" class="btn btn-info" @click='addToCart(index)' v-if="lesson.Availability > 0">Add To Cart</button>
               </div>
           </div>
 
@@ -131,7 +140,7 @@ export default {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
   .card {
-    width: 16rem;
+    width: 25rem;
     margin-bottom: 10px;
   }
   #addtocart {
@@ -141,5 +150,14 @@ export default {
   .sorting-div {
     margin-left: 20px;
     margin-right: 40px;
+  }
+  .d-flex {
+    height: 35px;
+    margin-bottom: 10px;
+  }
+  #cartbutton {
+    margin-top:-5px;
+    height:35px;
+    margin-right: -5px;
   }
 </style>
