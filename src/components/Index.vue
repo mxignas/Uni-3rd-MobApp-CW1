@@ -9,11 +9,11 @@
 
     <div class="d-flex bg-secondary">
       <div class="p-2 bg-info text-center"><strong>Home</strong></div>
-      <div class="ml-auto p-2" v-if="cart.length > 0">
+      <div class="ml-auto p-2" v-if="$store.state.cart.length > 0">
         <button type="button" class="btn btn-default bg-info text-weight-bolder" id="cartbutton">
-          <router-link :to="{name: 'Checkout', params: {items: Lessons.id}}">
+          <router-link :to="{name: 'Checkout'}">
           <div class="glyphicon glyphicon-shopping-cart text-dark ">
-            Shopping cart: <strong> {{ cart.length }} </strong> items
+            Shopping cart: <strong> {{ $store.state.cart.length }} </strong> items
           </div>
           </router-link>
           <!-- Go to cart: <b> {{ cart.length }} </b> items -->
@@ -53,11 +53,12 @@
                   <li class="list-group-item">Subject: {{ lesson.Activity }} </li>
                   <li class="list-group-item">Location: {{ lesson.Location }} </li>
                   <li class="list-group-item">Price: {{ lesson.Price }} </li>
-                  <li class="list-group-item text-danger">Availability: {{ lesson.Availability }} </li>
+                  <li class="list-group-item text-danger">Availability: {{ $store.state.Lessons[index].Availability }} </li>
                 </ul>
               </div>
               <div class="card-body " id="addtocart">
-                <button type="button" class="btn btn-info" @click='addToCart(index)' v-if="lesson.Availability > 0">Add To Cart</button>
+                <button type="button" class="btn btn-info" @click='addToCart(index)' v-if="$store.state.Lessons[index].Availability > 0">Add To Cart</button>
+                <button class="btn btn-info" disabled='disabled' v-else> Add To cart </button>
               </div>
           </div>
 
@@ -81,13 +82,8 @@ import volleyballImg from "../assets/Volleyball.png"
 import tennisImg from "../assets/Tennis.png"
 import soccerImg from "../assets/Soccer.png"
 
-// import Checkout from "@/components/Checkout.vue"
-
 export default {
   name: 'Index',
-  // components: {
-  //   Checkout
-  // },
   data () {
     return {
       cart: [],
@@ -119,24 +115,25 @@ export default {
     // addingClass() {
     //   this.ByList.addClass("active")
     // },
-    sortBy() {
-      this.Lessons.sort((a, b) => a[prop] < b[prop] ? -1 : 1)
-    },
+    // sortBy() {
+    //   this.Lessons.sort((a, b) => a[prop] < b[prop] ? -1 : 1)
+    // },
     addToCart(index) {
-      this.cart.push(this.Lessons[index].id);
-      console.log(this.Lessons[index].id)
-      this.Lessons[index].Availability = this.Lessons[index].Availability - 1
-      console.log(this.cart.length)
+      this.$store.state.cart.push({lessonID: this.$store.state.Lessons[index].id, lessonTitle: this.$store.state.Lessons[index].Title,
+       lessonActivity: this.$store.state.Lessons[index].Activity, lessonLocation: this.$store.state.Lessons[index].Location,
+        lessonPrice: this.$store.state.Lessons[index].Price, lessonAvailability: this.$store.state.Lessons[index].Availability});
+
+      console.log("what index is being passed: " + this.$store.state.Lessons[index].id)
+      this.$store.state.Lessons[index].Availability = this.$store.state.Lessons[index].Availability - 1
+      console.log("length: " + this.$store.state.cart.length)
+      let test = JSON.stringify(this.$store.state.cart)
+      console.log("what contains: " + test)
     }
   },
   computed: {
-    cartItemNumber: function() {
-      return this.cart.length || '';
-    },
-    ifCanAdd: function() {
-      return this.Lessons[index].Availability > this.cartItemNumber
-    },
-
+    isDisabled() {
+      return this.button.validated
+    }
   }
 }
 

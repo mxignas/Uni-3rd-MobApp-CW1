@@ -6,9 +6,7 @@
             </router-link>
         </div>
         <h1 class="display-2">Checkout </h1>
-        <Index ref="index">
-        <button @click="test()">asdasdasdasdasdasdasdasdasdasd</button>
-        </Index>
+        
     </div>
 </template>
 
@@ -17,23 +15,15 @@ import Index from "@/components/Index.vue"
 
 export default {
     name: "Checkout",
-    components: {
-        Index,
-    },
-    // props: [
-    //     {
-    //         id, url, Title, Activity, Location, Price, Availability
-    //     }
-    // ],
     data() {
         return {
             msg: "Checkout",
         }
     },
-    methods: {
-        test() {
-            console.log(this.$refs.index)
-        }
+    computed: {
+        lessons() {
+            return this.$store.state.Lessons
+        },
     }
 }
 </script>
