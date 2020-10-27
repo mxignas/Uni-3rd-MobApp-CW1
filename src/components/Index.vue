@@ -8,12 +8,12 @@
     </nav> -->
 
     <div class="d-flex bg-secondary">
-      <div class="p-2 bg-info text-center"><b>Home</b></div>
+      <div class="p-2 bg-info text-center"><strong>Home</strong></div>
       <div class="ml-auto p-2" v-if="cart.length > 0">
         <button type="button" class="btn btn-default bg-info text-weight-bolder" id="cartbutton">
-          <router-link :to="{name: 'Checkout', params: {items: Lessons}}">
+          <router-link :to="{name: 'Checkout', params: {items: Lessons.id}}">
           <div class="glyphicon glyphicon-shopping-cart text-dark ">
-            Go to cart: <b> {{ cart.length }} </b> items
+            Shopping cart: <strong> {{ cart.length }} </strong> items
           </div>
           </router-link>
           <!-- Go to cart: <b> {{ cart.length }} </b> items -->
@@ -26,7 +26,7 @@
       <div class="row">
 
         <div class="sorting-div">
-          <h4><b>Sort by:</b></h4>
+          <h4><strong>Sort by:</strong></h4>
           <div class="btn-group-vertical btn-group-toggle" data-toggle="buttons">
             <label class="btn btn-secondary" v-for="blist in ByList" :key="blist.id" @:click="sortBy(blist.label)">
               <input type="radio" name="options" id="Subject" autocomplete="off" checked> {{ blist.label }}
@@ -81,8 +81,13 @@ import volleyballImg from "../assets/Volleyball.png"
 import tennisImg from "../assets/Tennis.png"
 import soccerImg from "../assets/Soccer.png"
 
+// import Checkout from "@/components/Checkout.vue"
+
 export default {
   name: 'Index',
+  // components: {
+  //   Checkout
+  // },
   data () {
     return {
       cart: [],
