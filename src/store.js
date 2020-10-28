@@ -14,6 +14,7 @@ import basketballImg from "./assets/Basketball.png"
 import volleyballImg from "./assets/Volleyball.png"
 import tennisImg from "./assets/Tennis.png"
 import soccerImg from "./assets/Soccer.png"
+
 export const store = new Vuex.Store({
     
     state: { 
