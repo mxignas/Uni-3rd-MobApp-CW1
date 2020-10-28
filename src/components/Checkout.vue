@@ -8,6 +8,7 @@
                 <div class="p-2 bg-info text-center" id="checkout"><strong>Checkout</strong></div>
             </div>
         </div>
+        <h1 class="display-3 text-center text-info">Your cart</h1>
         <div class="container main">
             <div class="row">
                 <div class="col-7 bg-secondary" >
@@ -27,8 +28,38 @@
                         </div>
                     </div>  
                 </div>
-                <div class="col bg-danger">
-                    column 2 of 2
+                <div class="col">
+                    <form>
+                        <h2 class="display-4 text-center text-info">Your information</h2>
+                        <div class="row">
+                            <div class="col">
+                                <label for="first_name">First name</label>
+                                <input type="text" class="form-control" placeholder="First name" v-model="order.firstName">
+                            </div>
+                            <div class="col">
+                                <label for="last_name">Last name</label>
+                                <input type="text" class="form-control" placeholder="Last name" v-model="order.lastName">
+                            </div>
+                        </div>
+                        <p></p>
+                        <div class="form-group">
+                            <label for="phone_number">Phone number</label>
+                            <input type="number" class="form-control" aria-describedby="emailHelp" placeholder="Enter phone number" v-model="order.phone">
+                        </div>
+                        <div class="form-group">
+                            <label for="email_address">Email address</label>
+                            <input type="email" class="form-control" aria-describedby="emailHelp" placeholder="Enter email" v-model="order.email">
+                        </div>
+                        <div class="display-4 text-center">
+                            Order information
+                        </div>
+                        <p></p>
+                        <p><strong>First Name: </strong>{{ order.firstName }}</p>
+                        <p><strong>Last Name: </strong>{{ order.lastName }}</p>
+                        <p><strong>Phone Number: </strong>{{ order.phone }}</p>
+                        <p><strong>Email: </strong>{{ order.email }}</p>
+                        <button type="submit" class="btn btn-primary" @click="submitalert">Submit</button>
+                    </form>
                 </div>
             </div>
         </div>
@@ -48,6 +79,9 @@ export default {
     computed: {
         cart() {
             return this.$store.state.cart;
+        },
+        order() {
+            return this.$store.state.order;
         }
     },
     methods: {
@@ -56,6 +90,11 @@ export default {
                 return lssn.lessonID == lesson.id
             });
             this.$store.state.cart.splice(this.$store.state.cart.indexOf(lesson), 1);
+        },
+        submitalert() {
+            alert("Succesfully purchased our product!")
+            this.$store.state.cart = []
+            this.$router.push({ name: 'Index' })
         }
     }
 }
@@ -74,6 +113,6 @@ export default {
     }
     .card {
     width: 20rem;
-    margin: 10px 5px;
+    margin: 10px 10px;
   }
 </style>

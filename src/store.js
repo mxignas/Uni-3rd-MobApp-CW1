@@ -18,6 +18,12 @@ import soccerImg from "./assets/Soccer.png"
 export const store = new Vuex.Store({
     
     state: { 
+        order: {
+            firstName: '',
+            lastName: '',
+            phone: '',
+            email: '',
+        },
         Lessons: [
         { id: 1001, url: mathImg, Title: "Lessons", Activity: "Math", Location: "West End", Price: "100", Availability: 5 },
         { id: 1002, url: soccerImg, Title: "Sports", Activity: "Soccer", Location: "Hendon", Price: "50", Availability: 5 },
