@@ -22,7 +22,7 @@
           <h4><strong>Sort by:</strong></h4>
           <div class="btn-group-vertical btn-group-toggle" data-toggle="buttons">
             <label class="btn btn-secondary">
-              <input type="radio" name="options" id="Subject" autocomplete="off" checked @click="sort()"> Subject
+              <button type="radio" name="options" id="Subject" autocomplete="off" checked @click="SORT_LESSONS_BY_TITLE"> Subject </button>
             </label>
             <label class="btn btn-secondary">
               <input type="radio" name="options" id="Subject" autocomplete="off" checked> Location
@@ -91,7 +91,7 @@ export default {
     }
   },
   methods: {
-    sort() {
+    SORT_LESSONS_BY_TITLE() {
       this.$store.commit('SORT_LESSONS_BY_TITLE')
     },
     addToCart(index) {
