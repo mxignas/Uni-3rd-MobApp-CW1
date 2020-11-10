@@ -21,19 +21,16 @@
         <div class="sorting-div">
           <h4><strong>Sort by:</strong></h4>
           <div class="btn-group-vertical btn-group-toggle" data-toggle="buttons">
-            <label class="btn btn-secondary">
-              <input type="radio" name="options" id="Subject" autocomplete="off" checked @click="sort()"> Subject
-            </label>
-            <label class="btn btn-secondary">
-              <input type="radio" name="options" id="Subject" autocomplete="off" checked> Location
-            </label>
-            <label class="btn btn-secondary">
-              <input type="radio" name="options" id="Subject" autocomplete="off" checked> Price
-            </label>
-            <label class="btn btn-secondary">
-              <input type="radio" name="options" id="Subject" autocomplete="off" checked> Availability
+            <label class="btn btn-secondary" v-for="key in ByList">
+              <input type="radio" name="options" id="Subject" autocomplete="off" checked> {{ key }}
             </label>
           </div>
+
+          <button @click="sortSubjAsc"> subject asc</button>
+          <button @click="sortSubjDesc"> subject desc</button>
+          <button @click="sortPriceAsc"> Price Ascending </button>
+          <button @click="sortPriceDesc"> Price Descending </button>
+
 
             <br>
             <p></p>
@@ -45,23 +42,25 @@
           </div>
         </div>
 
-        <div class="col-md-6 col-lg-3" v-for="(lesson, index) in $store.state.Lessons" :key="lesson.index">
+        <div class="col-md-6 col-lg-3" v-for="entry in filteredLessons">
         
-          <div class="card" >
-            <img :src="$store.state.Lessons[index].url" alt="" class="card-img-top img-fluid">
+          <div class="card" v-for="key in ByList">
+            {{ entry[key] }}
+            <p></p>
+            <!-- <img :src="$store.state.Lessons[index].url" alt="" class="card-img-top img-fluid">
               <div class="card-body">
                 <h3 class="card-title">{{ $store.state.Lessons[index].Title }}</h3>
                 <ul class="list-group list-group-flush">
-                  <li class="list-group-item">Subject: {{ $store.state.Lessons[index].Activity }} </li>
-                  <li class="list-group-item">Location: {{ $store.state.Lessons[index].Location }} </li>
-                  <li class="list-group-item">Price: {{ $store.state.Lessons[index].Price }} </li>
-                  <li class="list-group-item text-danger">Availability: {{ $store.state.Lessons[index].Availability }} </li>
+                  <li class="list-group-item">Subject: {{ $store.state.Lessons[key][index].Activity }} </li>
+                  <li class="list-group-item">Location: {{ $store.state.Lessons[index][key].Location }} </li>
+                  <li class="list-group-item">Price: {{ $store.state.Lessons[index][key].Price }} </li>
+                  <li class="list-group-item text-danger">Availability: {{ $store.state.Lessons[index][key].Availability }} </li>
                 </ul>
               </div>
               <div class="card-body " id="addtocart">
                 <button type="button" class="btn btn-info" @click='addToCart(index)' v-if="$store.state.Lessons[index].Availability > 0">Add To Cart</button>
                 <button class="btn btn-info" disabled='disabled' v-else> Add To cart </button>
-              </div>
+              </div> -->
           </div>
 
         </div>
@@ -78,12 +77,7 @@ export default {
   name: 'Index',
   data () {
     return {
-      ByList: [
-        { label: "Subject"},
-        { label: "Location"},
-        { label: "Price"},
-        { label: "Availability"}
-      ],
+      ByList: [ "Subject", "Location", "Price", "Availability" ],
       HowList: [
         { label: "Ascending"},
         { label: "Descending"},
@@ -91,8 +85,17 @@ export default {
     }
   },
   methods: {
-    sort() {
-      this.$store.commit('SORT_LESSONS_BY_TITLE')
+    sortSubjAsc() {
+      this.$store.state.Lessons.sort((a, b) => a.Location > b.Location ? 1 : -1 )
+    },
+    sortSubjDesc() {
+      this.$store.state.Lessons.sort((a, b) => a.Location < b.Location ? 1 : -1 )
+    },
+    sortPriceAsc() {
+      this.$store.state.Lessons.sort((a, b) => a.Price > b.Price ? 1 : -1 )
+    },
+    sortPriceDesc() {
+      this.$store.state.Lessons.sort((a, b) => a.Price < b.Price ? 1 : -1 )
     },
     addToCart(index) {
       this.$store.state.cart.push({lessonID: this.$store.state.Lessons[index].id,
@@ -104,15 +107,16 @@ export default {
       console.log("length: " + this.$store.state.cart.length)
       let test = JSON.stringify(this.$store.state.cart)
       console.log("what contains: " + test)
-    }
+    },
   },
   computed: {
     filteredLessons() {
       let filter = new RegExp(this.filterText, 'i')
-      return this.$store.state.Lessons.filter(el => el.Activity.match(filter))
-    }
-  }
-  }
+      return this.$store.state.Lessons.filter(el => el.Location.match(filter))
+    },
+},
+}
+
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->

@@ -22,7 +22,7 @@
           <h4><strong>Sort by:</strong></h4>
           <div class="btn-group-vertical btn-group-toggle" data-toggle="buttons">
             <label class="btn btn-secondary">
-              <input type="radio" name="options" id="Subject" autocomplete="off" checked @click="sort()"> Subject
+              <input type="radio" name="options" id="Subject" autocomplete="off" checked @click="sortSubj"> Subject
             </label>
             <label class="btn btn-secondary">
               <input type="radio" name="options" id="Subject" autocomplete="off" checked> Location
@@ -91,8 +91,8 @@ export default {
     }
   },
   methods: {
-    sort() {
-      this.$store.commit('SORT_LESSONS_BY_TITLE')
+    sortSubj() {
+      this.$store.state.Lessons.sort((a, b) => a.Activity > b.rating ? 1 : -1 )
     },
     addToCart(index) {
       this.$store.state.cart.push({lessonID: this.$store.state.Lessons[index].id,
@@ -113,6 +113,7 @@ export default {
     }
   }
   }
+
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
