@@ -21,26 +21,29 @@
         <div class="sorting-div">
           <h4><strong>Sort by:</strong></h4>
           <div class="btn-group-vertical btn-group-toggle" data-toggle="buttons">
-            <label class="btn btn-secondary">
-              <button type="radio" name="options" id="Subject" autocomplete="off" checked @click="SORT_LESSONS_BY_TITLE"> Subject </button>
+            <label class="btn">
+              <button type="button" class="btn btn-secondary" id="Subject" autocomplete="off" checked @click="SORT_LESSONS_BY_ACTIVITY_ASC"> Subject Ascending </button>
             </label>
-            <label class="btn btn-secondary">
-              <input type="radio" name="options" id="Subject" autocomplete="off" checked> Location
+            <label class="btn">
+              <button type="button" class="btn btn-secondary" id="Subject" autocomplete="off" checked @click="SORT_LESSONS_BY_ACTIVITY_DESC"> Subject Descending </button>
             </label>
-            <label class="btn btn-secondary">
-              <input type="radio" name="options" id="Subject" autocomplete="off" checked> Price
+            <label class="btn">
+              <button type="button" class="btn btn-secondary" id="Subject" autocomplete="off" checked @click="SORT_LESSONS_BY_LOCATION_ASC"> Location Ascending</button>
             </label>
-            <label class="btn btn-secondary">
-              <input type="radio" name="options" id="Subject" autocomplete="off" checked> Availability
+            <label class="btn">
+              <button type="button" class="btn btn-secondary" id="Subject" autocomplete="off" checked @click="SORT_LESSONS_BY_LOCATION_DESC"> Location Descending</button>
             </label>
-          </div>
-
-            <br>
-            <p></p>
-
-          <div class="btn-group-vertical btn-group-toggle" data-toggle="buttons">
-            <label class="btn btn-secondary" v-for="hlist in HowList" :key="hlist.id">
-              <input type="radio" name="options" id="Ascending" autocomplete="off" checked> {{ hlist.label }}
+            <label class="btn">
+              <button type="button" class="btn btn-secondary" id="Subject" autocomplete="off" checked @click="SORT_LESSONS_BY_PRICE_ASC"> Price Ascending</button>
+            </label>
+            <label class="btn">
+              <button type="button" class="btn btn-secondary" id="Subject" autocomplete="off" checked @click="SORT_LESSONS_BY_PRICE_DESC"> Price Descending</button>
+            </label>
+            <label class="btn">
+              <button type="button" class="btn btn-secondary" id="Subject" autocomplete="off" checked @click="SORT_LESSONS_BY_AVAILABILITY_ASC"> Availability Ascending</button>
+            </label>
+            <label class="btn">
+              <button type="button" class="btn btn-secondary" id="Subject" autocomplete="off" checked @click="SORT_LESSONS_BY_AVAILABILITY_DESC"> Availability Descending</button>
             </label>
           </div>
         </div>
@@ -91,19 +94,35 @@ export default {
     }
   },
   methods: {
-    SORT_LESSONS_BY_TITLE() {
-      this.$store.commit('SORT_LESSONS_BY_TITLE')
+    SORT_LESSONS_BY_ACTIVITY_ASC() {
+      this.$store.commit('SORT_LESSONS_BY_ACTIVITY_ASC')
+    },
+    SORT_LESSONS_BY_ACTIVITY_DESC() {
+      this.$store.commit('SORT_LESSONS_BY_ACTIVITY_DESC')
+    },
+    SORT_LESSONS_BY_LOCATION_ASC() {
+      this.$store.commit('SORT_LESSONS_BY_LOCATION_ASC')
+    },
+    SORT_LESSONS_BY_LOCATION_DESC() {
+      this.$store.commit('SORT_LESSONS_BY_LOCATION_DESC')
+    },
+    SORT_LESSONS_BY_PRICE_ASC() {
+      this.$store.commit('SORT_LESSONS_BY_PRICE_ASC')
+    },
+    SORT_LESSONS_BY_PRICE_DESC() {
+      this.$store.commit('SORT_LESSONS_BY_PRICE_DESC')
+    },
+    SORT_LESSONS_BY_AVAILABILITY_ASC() {
+      this.$store.commit('SORT_LESSONS_BY_AVAILABILITY_ASC')
+    },
+    SORT_LESSONS_BY_AVAILABILITY_DESC() {
+      this.$store.commit('SORT_LESSONS_BY_AVAILABILITY_DESC')
     },
     addToCart(index) {
       this.$store.state.cart.push({lessonID: this.$store.state.Lessons[index].id,
        lessonActivity: this.$store.state.Lessons[index].Activity, lessonLocation: this.$store.state.Lessons[index].Location,
-        lessonPrice: this.$store.state.Lessons[index].Price, lessonAvailability: this.$store.state.Lessons[index].Availability});
-
-      console.log("what index is being passed: " + this.$store.state.Lessons[index].id)
-      this.$store.state.Lessons[index].Availability = this.$store.state.Lessons[index].Availability - 1
-      console.log("length: " + this.$store.state.cart.length)
-      let test = JSON.stringify(this.$store.state.cart)
-      console.log("what contains: " + test)
+        lessonPrice: this.$store.state.Lessons[index].Price, lessonAvailability: this.$store.state.Lessons[index].Availability})
+        this.$store.state.Lessons[index].Availability = this.$store.state.Lessons[index].Availability - 1
     }
   },
   computed: {

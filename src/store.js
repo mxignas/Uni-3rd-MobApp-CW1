@@ -16,7 +16,6 @@ import tennisImg from "./assets/Tennis.png"
 import soccerImg from "./assets/Soccer.png"
 
 export const store = new Vuex.Store({
-    
     state: { 
         order: {
             firstName: '',
@@ -39,20 +38,92 @@ export const store = new Vuex.Store({
         cart: [],
     },
     mutations: {
-        SORT_LESSONS_BY_TITLE(state) {
-            if(state.Lessons > 0) {
-            state.Lessons.Title.sort(function (a, b) {
-                let titleA = a.Title.toUpperCase()
-                let titleB = b.Title.toUpperCase()
-                if (titleA < titleB) {
-                    return -1
-                }
-                if (titleA > titleB) {
-                    return 1
-                }
-            })
-    }}
-}
+        SORT_LESSONS_BY_ACTIVITY_ASC(state) {
+            if(this.state.Lessons.Activity != "") {
+                state.Lessons.sort(function (a, b) {
+                    let ActivityA = a.Activity.toUpperCase()
+                    let ActivityB = b.Activity.toUpperCase()
+                    if (ActivityA < ActivityB) {
+                        return -1
+                    }
+                    if (ActivityA > ActivityB) {
+                        return 1
+                    }
+                })
+            }
+        },
+        SORT_LESSONS_BY_ACTIVITY_DESC(state) {
+            if (this.state.Lessons.Activity != "") {
+                state.Lessons.sort(function (a, b) {
+                    let ActivityA = a.Activity.toUpperCase()
+                    let ActivityB = b.Activity.toUpperCase()
+                    if (ActivityA < ActivityB) {
+                        return 1
+                    }
+                    if (ActivityA > ActivityB) {
+                        return -1
+                    }
+                })
+            }
+        },
+        SORT_LESSONS_BY_LOCATION_ASC(state) {
+            if (this.state.Lessons.Location != "") {
+                state.Lessons.sort(function (a, b) {
+                    let LocationA = a.Activity.toUpperCase()
+                    let LocationB = b.Activity.toUpperCase()
+                    if (LocationA < LocationB) {
+                        return -1
+                    }
+                    if (LocationA > LocationB) {
+                        return 1
+                    }
+                })
+            }
+        },
+        SORT_LESSONS_BY_LOCATION_DESC(state) {
+            if (this.state.Lessons.Location != "") {
+                state.Lessons.sort(function (a, b) {
+                    let LocationA = a.Location.toUpperCase()
+                    let LocationB = b.Location.toUpperCase()
+                    if (LocationA < LocationB) {
+                        return 1
+                    }
+                    if (LocationA > LocationB) {
+                        return -1
+                    }
+                })
+            }
+        },
+        SORT_LESSONS_BY_PRICE_ASC(state) {
+            if (this.state.Lessons.Price != "") {
+                state.Lessons.sort(function (a, b) {
+                    return a.Price - b.Price
+                })
+            }
+        },
+        SORT_LESSONS_BY_PRICE_DESC(state) {
+            if (this.state.Lessons.Price != "") {
+                state.Lessons.sort(function (a, b) {
+                    return b.Price - a.Price
+                })
+            }
+        },
+        SORT_LESSONS_BY_AVAILABILITY_ASC(state) {
+            if (this.state.Lessons.Availability != "") {
+                state.Lessons.sort(function (a, b) {
+                    return a.Availability - b.Availability
+                })
+            }
+        },
+        SORT_LESSONS_BY_AVAILABILITY_DESC(state) {
+            if (this.state.Lessons.Availability != "") {
+                state.Lessons.sort(function (a, b) {
+                    return b.Availability - a.Availability
+                })
+            }
+        },
+
+    }
 })
 
 

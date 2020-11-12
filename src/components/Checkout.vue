@@ -44,11 +44,11 @@
                         <p></p>
                         <div class="form-group">
                             <label for="phone_number">Phone number</label>
-                            <input type="number" class="form-control" aria-describedby="emailHelp" placeholder="Enter phone number" v-model="order.phone">
+                            <input type="number" id="phonevalidation" class="form-control" placeholder="Enter phone number" onkeypress="belekas(this.id,event)" v-model="order.phone" maxlength="3">
                         </div>
                         <div class="form-group">
                             <label for="email_address">Email address</label>
-                            <input type="email" class="form-control" aria-describedby="emailHelp" placeholder="Enter email" v-model="order.email">
+                            <input type="email" class="form-control" placeholder="Enter email" v-model="order.email">
                         </div>
                         <div class="display-4 text-center">
                             Order information
@@ -58,7 +58,7 @@
                         <p><strong>Last Name: </strong>{{ order.lastName }}</p>
                         <p><strong>Phone Number: </strong>{{ order.phone }}</p>
                         <p><strong>Email: </strong>{{ order.email }}</p>
-                        <button type="submit" class="btn btn-primary" @click="submitalert">Submit</button>
+                        <button type="submit" class="btn btn-primary" @click="test">Submit</button>
                     </form>
                 </div>
             </div>
@@ -91,11 +91,19 @@ export default {
             });
             this.$store.state.cart.splice(this.$store.state.cart.indexOf(lesson), 1);
         },
+        PhoneValidation() {
+            let value = document.getElementById('phonevalidation').value
+            if(value.length < 9) {
+            return false
+            }
+        },
         submitalert() {
+            // if(PhoneValidation) {
             alert("Succesfully purchased our product!")
             this.$store.state.cart = []
             this.$router.push({ name: 'Index' })
-        }
+            // }
+        },
     }
 }
 </script>
@@ -115,4 +123,7 @@ export default {
     width: 20rem;
     margin: 10px 10px;
   }
+  input:invalid:focus {
+  background-image: linear-gradient(pink, lightgreen);
+}
 </style>
