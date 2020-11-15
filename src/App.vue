@@ -1,5 +1,6 @@
 <template>
   <div id="app">
+    <!-- Showing banner to all the components -->
     <Banner />
     <router-view />
   </div>

@@ -1,4 +1,5 @@
 <template>
+<!-- Creating banner -->
     <div class="banner">
         <div class="jumbotron jumbotron-fluid bg-info text-center">
             <div class="container">

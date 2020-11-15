@@ -3,7 +3,7 @@ import Vuex from 'vuex'
 
 Vue.use(Vuex)
 
-
+// importing images for assets folder
 import mathImg from "./assets/Math.png"
 import englishImg from "./assets/English.png"
 import artImg from "./assets/Art.png"
@@ -15,14 +15,10 @@ import volleyballImg from "./assets/Volleyball.png"
 import tennisImg from "./assets/Tennis.png"
 import soccerImg from "./assets/Soccer.png"
 
+
 export const store = new Vuex.Store({
-    state: { 
-        order: {
-            firstName: '',
-            lastName: '',
-            phone: '',
-            email: '',
-        },
+    state: {
+        // Lessons stored in array
         Lessons: [
         { id: 1001, url: mathImg, Title: "Lessons", Activity: "Math", Location: "West End", Price: 100, Availability: 5 },
         { id: 1002, url: soccerImg, Title: "Sports", Activity: "Soccer", Location: "Hendon", Price: 50, Availability: 5 },
@@ -35,11 +31,15 @@ export const store = new Vuex.Store({
         { id: 1009, url: geographyImg, Title: "Lessons", Activity: "Geography", Location: "London", Price: 60, Availability: 5 },
         { id: 1010, url: basketballImg, Title: "Sports", Activity: "Basketball", Location: "Soho", Price: 95, Availability: 5 },
         ],
+        //  Cart array where lessons in cart going to be stored.
         cart: [],
     },
     mutations: {
+        // All of those mutations are for sorting the lessons
+
         SORT_LESSONS_BY_ACTIVITY_ASC(state) {
             if(this.state.Lessons.Activity != "") {
+                // sorting the lessons by activity in Ascending way
                 state.Lessons.sort(function (a, b) {
                     let ActivityA = a.Activity.toUpperCase()
                     let ActivityB = b.Activity.toUpperCase()
@@ -54,6 +54,7 @@ export const store = new Vuex.Store({
         },
         SORT_LESSONS_BY_ACTIVITY_DESC(state) {
             if (this.state.Lessons.Activity != "") {
+                // sorting the lessons by activity in Descending way
                 state.Lessons.sort(function (a, b) {
                     let ActivityA = a.Activity.toUpperCase()
                     let ActivityB = b.Activity.toUpperCase()
